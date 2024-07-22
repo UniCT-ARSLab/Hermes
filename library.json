@@ -1,0 +1,20 @@
+{
+  "name": "Hermes",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": "mesh, networking, lora, esp-now, wifi-mesh",
+  "authors": [
+    {
+      "name": "Davide Carnemolla",
+      "email": "herbrant@protonmail.com",
+      "url": "https:/herbrant.github.io"
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/Herbrant/Hermes",
+  "dependencies": {
+    "LoraMesher": "https://github.com/LoRaMesher/LoRaMesher.git"
+  },
+  "frameworks": "arduino",
+  "platforms": "*"
+}
