@@ -1,8 +1,7 @@
 #include <Hermes.h>
 
 Hermes::Hermes(String name, size_t addr_size) : name_service(addr_size){ 
-    this->name = name; 
-    Serial.println(addr_size);
+    this->name = name;
 }
 
 bool Hermes::send_whois_request(const String name) {
