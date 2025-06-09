@@ -1,11 +1,10 @@
 #include <NameService.h>
 
+NameService::NameService(size_t addressSize) : address_size(addressSize) {}
+
 void NameService::add(const String& name, const uint8_t* addr) {
-    std::array<uint8_t, ADDRESS_SIZE> copy;
-    for (size_t i = 0; i < ADDRESS_SIZE; ++i) {
-        copy[i] = addr[i];
-    }
-    address_table[name] = copy;
+    std::vector<uint8_t> copy(addr, addr + address_size);
+    address_table[name] = std::move(copy);
 }
 
 bool NameService::exists(const String& name) const {

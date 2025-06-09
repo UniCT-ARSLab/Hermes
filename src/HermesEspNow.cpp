@@ -2,7 +2,7 @@
 
 HermesEspNow *HermesEspNow::instance = nullptr;
 
-HermesEspNow::HermesEspNow(const String name, uint8_t channel) : Hermes(name) {
+HermesEspNow::HermesEspNow(const String name, uint8_t channel) : Hermes(name, ESP_NOW_ADDR_SIZE) {
     this->channel = channel;
 }
 

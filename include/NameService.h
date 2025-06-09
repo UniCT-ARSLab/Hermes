@@ -3,21 +3,11 @@
 #include <Arduino.h>
 #include <Message.h>
 #include <map>
-#include <array>
-
-#if defined(PROTOCOLTYPE_LORA)
-  #define ADDRESS_SIZE 2
-#elif defined(PROTOCOLTYPE_WIFI)
-  #define ADDRESS_SIZE 6
-#elif defined(PROTOCOLTYPE_ESPNOW)
-  #define ADDRESS_SIZE 6
-#else
-  #define ADDRESS_SIZE 0
-  #warning "PROTOCOLTYPE not defined (usage -DPROTOCOLTYPE_LORA, _WIFI, or _ESPNOW)"
-#endif
+#include <vector>
 
 class NameService {
-public:
+  public:
+    explicit NameService(size_t addressSize);
     ~NameService() = default;
 
     void add(const String& name, const uint8_t* addr);
@@ -26,7 +16,9 @@ public:
     void remove(const String& name);
 
     // TODO : make private and add setter
-    std::map<String, std::array<uint8_t, ADDRESS_SIZE>> address_table;
+    std::map<String, std::vector<uint8_t>> address_table;
+  private:
+    size_t address_size;
 };
 
 #endif

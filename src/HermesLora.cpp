@@ -1,11 +1,14 @@
 #include <HermesLora.h>
 
+#include <LoraMesher.h>
+#define MAXPACKETSIZE 90
+
 HermesLora *HermesLora::instance = nullptr;
 
 HermesLora::HermesLora(const String name, const uint8_t lora_cs,
                        const uint8_t lora_irq, const uint8_t lora_rst,
                        const uint8_t lora_io1)
-    : Hermes(name) {
+    : Hermes(name, LORA_MESH_ADDR_SIZE) {
     LoraMesher::LoraMesherConfig config;
     config.loraCs = lora_cs;
     config.loraIrq = lora_irq;
@@ -47,7 +50,6 @@ void sendHelloPacketNow() {
 
     NetworkNode *nodes = RoutingTableService::getAllNetworkNodes();
     size_t numOfNodes = RoutingTableService::routingTableSize();
-
     size_t numPackets =
         (numOfNodes + maxNodesPerPacket - 1) / maxNodesPerPacket;
     numPackets = (numPackets == 0) ? 1 : numPackets;
@@ -79,7 +81,6 @@ bool HermesLora::send_to_address(const uint8_t *addr_to, Message *m) {
     uint16_t addr = addr_to[0] | (addr_to[1] << 8);
     uint8_t size;
     uint8_t *to_send = m->serialize(&size);
-
     LoraMesher &radio = LoraMesher::getInstance();
 
     if (m->type == WHOIS_REQUEST_MESSAGE || m->type == WHOIS_ANSWER_MESSAGE) {
