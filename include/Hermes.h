@@ -14,7 +14,7 @@ class Hermes {
     NameService name_service;
     MessageQueue message_queue;
 
-    Hermes(const String name);
+    Hermes(const String name, uint8_t addr_size);
     virtual bool start() = 0;
     virtual bool stop() = 0;
     virtual bool send_to_address(const uint8_t *addr_to, Message *m) = 0;

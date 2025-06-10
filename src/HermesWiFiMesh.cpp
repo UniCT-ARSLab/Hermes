@@ -5,7 +5,7 @@ HermesWiFiMesh *HermesWiFiMesh::instance = nullptr;
 HermesWiFiMesh::HermesWiFiMesh(const String name, const String net_id,
                                const uint8_t channel, const bool is_root,
                                const uint8_t max_connections)
-    : Hermes(name) {
+    : Hermes(name, WIFI_MESH_ADDR_SIZE) {
     this->is_root = is_root;
 
     mesh_cfg_t def_config = MESH_INIT_CONFIG_DEFAULT();
