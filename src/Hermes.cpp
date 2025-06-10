@@ -1,6 +1,6 @@
 #include <Hermes.h>
 
-Hermes::Hermes(String name, size_t addr_size) : name_service(addr_size){ 
+Hermes::Hermes(String name, uint8_t addr_size) : name_service(addr_size){ 
     this->name = name;
 }
 

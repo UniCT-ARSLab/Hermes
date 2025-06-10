@@ -7,7 +7,7 @@
 
 class NameService {
   public:
-    explicit NameService(size_t addressSize);
+    NameService(uint8_t _address_size);
     ~NameService() = default;
 
     void add(const String& name, const uint8_t* addr);
@@ -18,7 +18,7 @@ class NameService {
     // TODO : make private and add setter
     std::map<String, std::vector<uint8_t>> address_table;
   private:
-    size_t address_size;
+    uint8_t address_size;
 };
 
 #endif

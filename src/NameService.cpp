@@ -1,6 +1,6 @@
 #include <NameService.h>
 
-NameService::NameService(size_t addressSize) : address_size(addressSize) {}
+NameService::NameService(uint8_t _address_size) : address_size(_address_size) {}
 
 void NameService::add(const String& name, const uint8_t* addr) {
     std::vector<uint8_t> copy(addr, addr + address_size);
