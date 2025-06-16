@@ -18,6 +18,30 @@ HermesLora::HermesLora(const String name, const uint8_t lora_cs,
     LoraMesher::getInstance().begin(config);
 }
 
+
+
+HermesLora::HermesLora(const String name, const uint8_t lora_cs,
+                       const uint8_t lora_irq, const uint8_t lora_rst,
+                       const uint8_t lora_io1, const float freq, const int8_t power,
+                    int8_t spi_miso, int8_t spi_mosi, int8_t spi_clk)
+    : Hermes(name, LORA_MESH_ADDR_SIZE) {
+    LoraMesher::LoraMesherConfig config;
+    config.loraCs = lora_cs;
+    config.loraIrq = lora_irq;
+    config.loraRst = lora_rst;
+    config.loraIo1 = lora_io1;
+    config.freq = freq;
+    config.power = power;
+
+    radios_spi = new SPIClass(HSPI);
+    radios_spi->setBitOrder(MSBFIRST);
+    radios_spi->setDataMode(SPI_MODE0);
+    radios_spi->begin(spi_clk, spi_miso, spi_mosi);
+config.spi = radios_spi;
+
+    LoraMesher::getInstance().begin(config);
+}
+
 bool HermesLora::init(const String name, const uint8_t lora_cs,
                       const uint8_t lora_irq, const uint8_t lora_rst,
                       const uint8_t lora_io1) {

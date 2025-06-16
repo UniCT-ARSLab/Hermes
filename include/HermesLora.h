@@ -5,6 +5,7 @@
 #include <LoraMesher.h>
 #include <WiFi.h>
 #include <esp_wifi.h>
+#include <SPI.h>
 #define LORA_MESH_ADDR_SIZE 2
 
 class HermesLora : public Hermes {
@@ -12,6 +13,12 @@ class HermesLora : public Hermes {
     static HermesLora *instance;
     HermesLora(const String name, const uint8_t lora_cs, const uint8_t lora_irq,
                const uint8_t lora_rst, const uint8_t lora_io1);
+    HermesLora(const String name, const uint8_t lora_cs,
+                       const uint8_t lora_irq, const uint8_t lora_rst,
+                       const uint8_t lora_io1, const float freq, const int8_t power,
+                    int8_t spi_miso, int8_t spi_mosi, int8_t spi_clk);
+
+      
 
   public:
     // MultiEspNetLora should not be cloneable.
@@ -29,6 +36,7 @@ class HermesLora : public Hermes {
     bool send_to_address(const uint8_t *addr_to, Message *m) override;
     bool broadcast_send(Message *m) override;
     bool register_recv_cb(const hermes_recv_cb_t cb) override;
+    SPIClass * radios_spi;
 };
 
 #endif
