@@ -13,12 +13,11 @@ class HermesLora : public Hermes {
     static HermesLora *instance;
     HermesLora(const String name, const uint8_t lora_cs, const uint8_t lora_irq,
                const uint8_t lora_rst, const uint8_t lora_io1);
-    HermesLora(const String name, const uint8_t lora_cs,
-                       const uint8_t lora_irq, const uint8_t lora_rst,
-                       const uint8_t lora_io1, const float freq, const int8_t power,
-                    int8_t spi_miso, int8_t spi_mosi, int8_t spi_clk);
-
-      
+    HermesLora(const String name, 
+               const uint8_t lora_cs, const uint8_t lora_irq, 
+               const uint8_t lora_rst, const uint8_t lora_io1,
+               const float freq, const int8_t power,
+               int8_t spi_miso, int8_t spi_mosi, int8_t spi_clk);
 
   public:
     // MultiEspNetLora should not be cloneable.
@@ -30,6 +29,10 @@ class HermesLora : public Hermes {
     static bool init(const String name, const uint8_t lora_cs,
                      const uint8_t lora_irq, const uint8_t lora_rst,
                      const uint8_t lora_io1);
+    static bool init(const String name, const uint8_t lora_cs,
+                     const uint8_t lora_irq, const uint8_t lora_rst,
+                     const uint8_t lora_io1, const float freq, const int8_t power,
+                     int8_t spi_miso, int8_t spi_mosi, int8_t spi_clk);
     static HermesLora *get_instance();
     bool start() override;
     bool stop() override;
